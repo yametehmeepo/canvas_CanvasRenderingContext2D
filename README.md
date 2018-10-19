@@ -1,1 +1,2 @@
 # canvas_CanvasRenderingContext2D
+CanvasRenderingContext2D拓展canvas的context, 制定属于自己的contextAPI
