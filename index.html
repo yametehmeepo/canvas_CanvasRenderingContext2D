@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+	<title>CanvasRenderingContext2D——拓展canvas的context</title>
+	<style>
+		html,body{
+			margin: 0;
+			padding: 0;
+		}
+		#buttons a + a{
+			margin-left: 8px;
+		}
+	</style>
+</head>
+<body>
+	<canvas id="canvas" style="border: 1px solid #eee; display: block; margin:50px auto;">canvas</canvas>
+	<script>
+		var windowW = 800;
+		var windowH = 800;//canvas高
+		var canvas = document.getElementById('canvas');
+		var context = canvas.getContext('2d');
+		CanvasRenderingContext2D.prototype.fillStar = function(x, y, r, rot){
+			this.save();
+			this.translate(x, y);
+			this.rotate(rot*Math.PI/180);
+			this.scale(r, r);
+			this.beginPath();
+			for(var i = 0; i < 5; i++){
+				this.lineTo(
+					Math.cos((18 + i * 72 - rot)/180 * Math.PI), 
+					-Math.sin((18 + i * 72 - rot)/180 * Math.PI));
+				this.lineTo(
+					Math.cos((54 + i * 72 - rot)/180 * Math.PI)*0.5, 
+					-Math.sin((54 + i * 72 - rot)/180 * Math.PI)*0.5);
+			}
+			this.closePath();
+			this.fill();
+			this.restore();
+		}
+
+		window.onload = function(){
+			canvas.width = windowW;
+			canvas.height = windowH;
+			context.fillStyle = '#035';
+			context.fillStar(400, 400, 300, 0);
+		}
+	</script>
+</body>
+</html>
